@@ -8,3 +8,6 @@ Authentication module implemented.
 
 Version 1.2
 Integrated MySQL database connection and configured riser_db for persistent system data storage.
+
+Version 1.3
+Implemented daily activity logging for sales count, customer contacts, follow-ups, working hours, mood level and commitment level.

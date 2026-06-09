@@ -14,3 +14,6 @@ Implemented daily activity logging for sales count, customer contacts, follow-up
 
 Version 1.4
 Implemented analytics dashboard to display productivity indicators, performance metrics and activity summaries.
+
+Version 1.5
+Added leaderboard and ranking module to compare agent performance using productivity scores and activity records.

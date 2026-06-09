@@ -20,3 +20,6 @@ Added leaderboard and ranking module to compare agent performance using producti
 
 Version 1.6
 Implemented manager reporting module for team performance monitoring and appraisal report generation.
+
+Version 1.7
+Added administrator dashboard with user management, role assignment and system monitoring functions.

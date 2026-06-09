@@ -23,3 +23,6 @@ Implemented manager reporting module for team performance monitoring and apprais
 
 Version 1.7
 Added administrator dashboard with user management, role assignment and system monitoring functions.
+
+Version 1.8
+Enhanced the user interface with a modern blue and white dashboard layout, improved navigation and cleaner page alignment.

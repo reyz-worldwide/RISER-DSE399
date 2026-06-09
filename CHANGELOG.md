@@ -11,3 +11,6 @@ Integrated MySQL database connection and configured riser_db for persistent syst
 
 Version 1.3
 Implemented daily activity logging for sales count, customer contacts, follow-ups, working hours, mood level and commitment level.
+
+Version 1.4
+Implemented analytics dashboard to display productivity indicators, performance metrics and activity summaries.

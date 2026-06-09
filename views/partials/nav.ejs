@@ -1,0 +1,67 @@
+<%
+  const role = currentUser && currentUser.role ? currentUser.role : 'agent';
+  const avatarSrc = currentUser && currentUser.avatar_url ? currentUser.avatar_url : (role === 'manager' ? '/img/manager-avatar.svg' : (role === 'admin' ? '/img/admin-avatar.svg' : '/img/agent-avatar.svg'));
+  const navItems = [];
+  navItems.push({ href:'/dashboard', label:'Dashboard', roles:['agent','manager','admin'] });
+  if(role === 'agent'){
+    navItems.push({ href:'/activity', label:'Daily Activity', roles:['agent'] });
+    navItems.push({ href:'/goals', label:'Goals & Targets', roles:['agent'] });
+    navItems.push({ href:'/history', label:'Performance History', roles:['agent'] });
+  }
+  navItems.push({ href:'/analytics', label:'Analytics', roles:['agent','manager','admin'] });
+  navItems.push({ href:'/leaderboard', label:'Leaderboard', roles:['agent','manager','admin'] });
+  if(role === 'manager') navItems.push({ href:'/manager/reports', label:'Manager Reports', roles:['manager'] });
+  if(role === 'admin'){
+    navItems.push({ href:'/admin/users', label:'Users & Roles', roles:['admin'] });
+    navItems.push({ href:'/admin/settings', label:'System Settings', roles:['admin'] });
+    navItems.push({ href:'/manager/reports', label:'System Reports', roles:['admin'] });
+  }
+  navItems.push({ href:'/settings', label:'Profile Settings', roles:['agent','manager','admin'] });
+%>
+<aside class="sidebar">
+  <div class="sidebar-inner">
+    <a class="brand" href="/dashboard" aria-label="RISER dashboard">
+      <div class="brand-mark">R</div>
+      <div class="brand-text">
+        <h2>RISER</h2>
+        <p>Productivity Analytics</p>
+      </div>
+    </a>
+
+    <nav class="nav-menu">
+      <% navItems.forEach((item, index) => { %>
+        <a class="nav-item <%= typeof title !== 'undefined' && title && title.toLowerCase().includes(item.label.split(' ')[0].toLowerCase()) ? 'active' : '' %>" href="<%= item.href %>">
+          <span class="nav-index"><%= String(index + 1).padStart(2, '0') %></span>
+          <span><%= item.label %></span>
+        </a>
+      <% }) %>
+    </nav>
+
+    <div class="sidebar-profile">
+      <img class="profile-avatar" src="<%= avatarSrc %>" alt="Profile picture">
+      <div class="profile-meta">
+        <strong><%= currentUser.name %></strong>
+        <span><%= role.charAt(0).toUpperCase() + role.slice(1) %></span>
+        <small><%= currentUser.team || 'RISER Team' %></small>
+      </div>
+    </div>
+    <a class="logout-link" href="/logout">Sign Out</a>
+  </div>
+</aside>
+
+<header class="topbar">
+  <div>
+    <span class="page-kicker"><%= role.toUpperCase() %> WORKSPACE</span>
+    <h1><%= title || 'RISER' %></h1>
+  </div>
+  <div class="topbar-actions">
+    <a class="topbar-link" href="/settings">Profile</a>
+    <div class="top-profile">
+      <img class="profile-avatar small" src="<%= avatarSrc %>" alt="Profile picture">
+      <div>
+        <strong><%= currentUser.name %></strong>
+        <small><%= role.charAt(0).toUpperCase() + role.slice(1) %></small>
+      </div>
+    </div>
+  </div>
+</header>

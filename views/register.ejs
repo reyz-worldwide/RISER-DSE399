@@ -1,0 +1,19 @@
+<%- include('partials/head') %>
+<body class="auth">
+  <main class="auth-card">
+    <h1>Register</h1>
+    <p>Create your RISER agent account</p>
+    <%- include('partials/flash') %>
+    <form method="POST" action="/register">
+      <label>Full Name</label>
+      <input name="name" autocomplete="name" required>
+      <label>Email</label>
+      <input type="email" name="email" autocomplete="email" required>
+      <label>Password</label>
+      <input type="password" name="password" autocomplete="new-password" minlength="8" required>
+      <button type="submit">Create Account</button>
+    </form>
+    <a href="/login">Already have an account? Login</a>
+  </main>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<%- include('partials/head') %>
+<body><%- include('partials/nav') %><main>
+<div class="top"><span class="eyebrow">System Configuration</span><h1>System Settings</h1></div>
+<%- include('partials/flash') %>
+<section class="panel"><h2>KPI Weights & Recommendation Rules</h2><form method="POST" action="/admin/settings"><table><tr><th>Key</th><th>Value</th><th>Description</th></tr><% settings.forEach(s=>{ %><tr><td><input name="key" value="<%= s.key %>" readonly></td><td><input name="value" value="<%= s.value %>"></td><td><%= s.description %></td></tr><% }) %></table><button>Save System Settings</button></form></section>
+</main></body></html>

@@ -1,0 +1,20 @@
+<%- include('partials/head') %>
+<body class="auth">
+  <main class="auth-card">
+    <h1>System Setup</h1>
+    <p>Create the first administrator account</p>
+    <%- include('partials/flash') %>
+    <form method="POST" action="/setup">
+      <label>Full Name</label>
+      <input name="name" autocomplete="name" required>
+      <label>Email</label>
+      <input type="email" name="email" autocomplete="email" required>
+      <label>Password</label>
+      <input type="password" name="password" autocomplete="new-password" minlength="8" required>
+      <label>Team / Organisation</label>
+      <input name="team" value="RISER Organisation" required>
+      <button type="submit">Create Administrator</button>
+    </form>
+  </main>
+</body>
+</html>

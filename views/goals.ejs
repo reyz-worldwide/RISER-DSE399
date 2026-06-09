@@ -1,0 +1,10 @@
+<%- include('partials/head') %>
+<body><%- include('partials/nav') %><main>
+<div class="top"><span class="eyebrow">Agent Goal Planning</span><h1>Goals & Targets</h1></div>
+<%- include('partials/flash') %>
+<div class="grid three"><div class="card"><h3>Sales Achieved</h3><b><%= summary.totalSales %></b></div><div class="card"><h3>Customers Contacted</h3><b><%= summary.totalCustomers %></b></div><div class="card"><h3>Follow-ups</h3><b><%= summary.totalFollowups %></b></div></div>
+<section class="panel"><h2>Create Target Plan</h2><form method="POST" action="/goals" class="form-grid"><div><label>Period</label><input name="period" value="Week 1 - June 2026" required></div><div><label>Sales Target</label><input type="number" name="sales_target" value="20" min="0" required></div><div><label>Customer Target</label><input type="number" name="customer_target" value="50" min="0" required></div><div><label>Follow-up Target</label><input type="number" name="followup_target" value="25" min="0" required></div><div class="full"><label>Customer Focus</label><input name="customer_focus"></div><button>Save Goal Plan</button></form></section>
+<h2>Saved Goal Plans</h2>
+<% if(!goals.length){ %><div class="empty">No goal plan saved yet.</div><% } %>
+<table><tr><th>Period</th><th>Sales Target</th><th>Customer Target</th><th>Follow-up Target</th><th>Customer Focus</th><th>Created</th></tr><% goals.forEach(g=>{ %><tr><td><%= g.period %></td><td><%= g.sales_target %></td><td><%= g.customer_target %></td><td><%= g.followup_target %></td><td><%= g.customer_focus || g.notes || "-" %></td><td><%= g.created_at %></td></tr><% }) %></table>
+</main></body></html>

@@ -1,0 +1,15 @@
+<%- include('partials/head') %>
+<body><%- include('partials/nav') %><main>
+<% const avatarSrc = currentUser.avatar_url || (currentUser.role === 'manager' ? '/img/manager-avatar.svg' : (currentUser.role === 'admin' ? '/img/admin-avatar.svg' : '/img/agent-avatar.svg')); %>
+<div class="top"><span class="eyebrow">Account Settings</span><h1>Profile Settings</h1></div>
+<%- include('partials/flash') %>
+<div class="grid three">
+  <section class="panel settings-avatar-card">
+    <img class="profile-avatar large" src="<%= avatarSrc %>" alt="Profile picture">
+    <h2><%= currentUser.name %></h2>
+    <span class="role-pill"><%= currentUser.role %></span>
+  </section>
+  <section class="panel"><h2>Profile Details</h2><form method="POST" action="/settings"><label>Name</label><input name="name" value="<%= currentUser.name %>" required><label>Team</label><input name="team" value="<%= currentUser.team %>" required><label>Weekly Customer Goal</label><input type="number" name="weekly_goal" value="<%= currentUser.weekly_goal || 50 %>" min="0"><label>Monthly Customer Target</label><input type="number" name="monthly_target" value="<%= currentUser.monthly_target || 200 %>" min="0"><label>Profile Picture URL</label><input name="avatar_url" value="<%= avatarSrc %>" placeholder="/img/agent-avatar.svg or online image URL"><button>Update Profile</button></form></section>
+  <section class="panel"><h2>Password Update</h2><form method="POST" action="/settings/password"><label>New Password</label><input type="password" name="password" minlength="8" required><button>Change Password</button></form></section>
+</div>
+</main></body></html>

@@ -1,0 +1,17 @@
+<%- include('partials/head') %>
+<body class="auth">
+  <main class="auth-card">
+    <h1>RISER</h1>
+    <p>AI-Driven Business Productivity and Performance Analytics System</p>
+    <%- include('partials/flash') %>
+    <form method="POST" action="/login">
+      <label>Email</label>
+      <input type="email" name="email" autocomplete="email" required>
+      <label>Password</label>
+      <input type="password" name="password" autocomplete="current-password" required>
+      <button type="submit">Login</button>
+    </form>
+    <a href="/register">Create agent account</a>
+  </main>
+</body>
+</html>

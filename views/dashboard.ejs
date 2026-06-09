@@ -1,0 +1,31 @@
+<%- include('partials/head') %>
+<body><%- include('partials/nav') %><main>
+<% const avatarSrc = currentUser && currentUser.avatar_url ? currentUser.avatar_url : (currentUser.role === 'manager' ? '/img/manager-avatar.svg' : (currentUser.role === 'admin' ? '/img/admin-avatar.svg' : '/img/agent-avatar.svg')); %>
+<% if (mode === 'agent') { %>
+  <div class="top"><span class="eyebrow">Agent Module</span><h1>User Dashboard</h1></div>
+  <%- include('partials/flash') %>
+  <section class="hero"><div><div class="hero-profile"><img class="profile-avatar large" src="<%= avatarSrc %>" alt="Agent profile picture"><div><span class="role-pill">Agent Profile</span><h2>Performance Summary</h2></div></div><a class="btn" href="/activity">Add Daily Activity</a><a class="btn muted" href="/goals">Update Goals</a></div><div class="rank-circle"><%= summary.totalScore %><span>Total Score</span></div></section>
+  <div class="grid kpi"><div class="card"><h3>Sales</h3><b><%= summary.totalSales %></b><small>Total conversions</small></div><div class="card"><h3>Customers</h3><b><%= summary.totalCustomers %></b><small>Contacts made</small></div><div class="card"><h3>Follow-ups</h3><b><%= summary.totalFollowups %></b><small>Engagement actions</small></div><div class="card"><h3>Streak</h3><b><%= summary.streak %></b><small>Active logging days</small></div></div>
+  <div class="grid four"><div class="metric"><span>Growth</span><strong><%= summary.growth %></strong></div><div class="metric"><span>Consistency</span><strong><%= summary.consistency %></strong></div><div class="metric"><span>Engagement</span><strong><%= summary.engagement %></strong></div><div class="metric"><span>Leadership</span><strong><%= summary.leadership %></strong></div></div>
+  <div class="grid two">
+    <section class="panel"><h2>Goal Progress</h2><div class="meta-row"><span>Weekly Customer Goal: <%= summary.weeklyGoal %></span><span>Monthly Target: <%= summary.monthlyTarget %></span></div><div class="progress"><span style="width:<%= summary.goalProgress %>%"></span></div><b><%= summary.goalProgress %>% weekly progress</b><div class="progress secondary"><span style="width:<%= summary.monthlyProgress %>%"></span></div><b><%= summary.monthlyProgress %>% monthly progress</b></section>
+    <section class="panel"><h2>Achievement Badges</h2><div class="badges"><% summary.badges.forEach(b=>{ %><span><%= b %></span><% }) %></div></section>
+  </div>
+  <h2>AI Recommendations</h2>
+  <div class="recommendations"><% recommendations.forEach(r=>{ %><div class="rec priority-<%= r.priority.toLowerCase() %>"><span><%= r.priority %></span><%= r.task %><small><%= r.reason %></small></div><% }) %></div>
+<% } else if (mode === 'manager') { %>
+  <div class="top"><span class="eyebrow">Manager Module</span><h1>Manager Dashboard</h1></div>
+  <%- include('partials/flash') %>
+  <section class="hero manager"><div><div class="hero-profile"><img class="profile-avatar large" src="<%= avatarSrc %>" alt="Manager profile picture"><div><span class="role-pill">Manager Profile</span><h2>Team Performance Overview</h2></div></div><a class="btn" href="/manager/reports">Generate Appraisal Report</a></div><div class="rank-circle"><%= overview.summary.teamScore %><span>Team Score</span></div></section>
+  <div class="grid kpi"><div class="card"><h3>Total Sales</h3><b><%= overview.summary.totalSales %></b></div><div class="card"><h3>Customers</h3><b><%= overview.summary.totalCustomers %></b></div><div class="card"><h3>Follow-ups</h3><b><%= overview.summary.totalFollowups %></b></div><div class="card"><h3>Leadership Potential</h3><b><%= overview.summary.highPotentialCount %></b></div></div>
+  <div class="grid two"><section class="panel"><h2>Team KPI Snapshot</h2><div class="mini-list"><p><strong>Average Consistency:</strong> <%= overview.summary.avgConsistency %></p><p><strong>Average Engagement:</strong> <%= overview.summary.avgEngagement %></p><p><strong>Need Support:</strong> <%= overview.summary.needsSupportCount %></p><p><strong>Top Performer:</strong> <%= overview.summary.topPerformer ? overview.summary.topPerformer.name : 'N/A' %></p></div></section><section class="panel"><h2>Recognition Focus</h2><a class="btn" href="/leaderboard">View Leaderboard</a></section></div>
+  <h2>Manager AI Recommendations</h2>
+  <div class="recommendations"><% recommendations.forEach(r=>{ %><div class="rec priority-<%= r.priority.toLowerCase() %>"><span><%= r.priority %></span><%= r.task %><small><%= r.reason %></small></div><% }) %></div>
+<% } else { %>
+  <div class="top"><span class="eyebrow">Administrator Module</span><h1>Admin Dashboard</h1></div>
+  <%- include('partials/flash') %>
+  <section class="hero admin"><div><div class="hero-profile"><img class="profile-avatar large" src="<%= avatarSrc %>" alt="Admin profile picture"><div><span class="role-pill">Admin Profile</span><h2>System Configuration Overview</h2></div></div><a class="btn" href="/admin/users">Manage Users & Roles</a><a class="btn muted" href="/admin/settings">System Settings</a></div><div class="rank-circle"><%= overview.leaderboard.length %><span>Agents</span></div></section>
+  <div class="grid kpi"><div class="card"><h3>Team Score</h3><b><%= overview.summary.teamScore %></b></div><div class="card"><h3>Total Sales</h3><b><%= overview.summary.totalSales %></b></div><div class="card"><h3>Customers</h3><b><%= overview.summary.totalCustomers %></b></div><div class="card"><h3>Follow-ups</h3><b><%= overview.summary.totalFollowups %></b></div></div>
+  <section class="panel"><h2>Recent System Audit Logs</h2><table><tr><th>Time</th><th>User</th><th>Action</th><th>Details</th></tr><% logs.forEach(l=>{ %><tr><td><%= l.created_at %></td><td><%= l.name || 'System' %></td><td><%= l.action %></td><td><%= l.details %></td></tr><% }) %></table></section>
+<% } %>
+</main></body></html>

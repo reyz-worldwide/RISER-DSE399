@@ -1,0 +1,8 @@
+<%- include('partials/head') %>
+<body><%- include('partials/nav') %><main>
+<div class="top"><span class="eyebrow">Historical Tracking</span><h1>Historical Performance</h1></div>
+<section class="panel"><h2>Activity Trend Chart</h2><canvas id="historyChart" height="110"></canvas></section>
+<h2>Historical Activity Records</h2>
+<table><tr><th>Date</th><th>Sales</th><th>Customers</th><th>Follow-ups</th><th>Hours</th><th>Mood</th><th>Commitment</th><th>Schedule</th><th>Customer Update</th></tr><% activities.forEach(a=>{ %><tr><td><%= a.activity_date %></td><td><%= a.sales_count %></td><td><%= a.customer_count %></td><td><%= a.followups_count || 0 %></td><td><%= a.hours_worked %></td><td><%= a.mood_level %>/5</td><td><%= a.commitment_level || 3 %>/5</td><td><%= a.schedule_preference || 'Evening' %></td><td><%= a.customer_update || a.notes || '-' %></td></tr><% }) %></table>
+<script>const labels=<%- JSON.stringify(activities.map(a=>a.activity_date)) %>;const sales=<%- JSON.stringify(activities.map(a=>a.sales_count)) %>;const customers=<%- JSON.stringify(activities.map(a=>a.customer_count)) %>;const followups=<%- JSON.stringify(activities.map(a=>a.followups_count || 0)) %>;new Chart(document.getElementById('historyChart'),{type:'line',data:{labels,datasets:[{label:'Sales',data:sales,tension:.35},{label:'Customers',data:customers,tension:.35},{label:'Follow-ups',data:followups,tension:.35}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});</script>
+</main></body></html>

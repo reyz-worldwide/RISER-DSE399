@@ -1,0 +1,5 @@
+<%- include('partials/head') %>
+<body><%- include('partials/nav') %><main>
+<div class="top"><span class="eyebrow">Ranking & Leadership Module</span><h1>Ranking & Leaderboard</h1></div>
+<table><tr><th>Rank</th><th>Agent</th><th>Team</th><th>Total</th><th>Growth</th><th>Consistency</th><th>Engagement</th><th>Leadership</th><th>Badge</th></tr><% leaderboard.forEach(row=>{ %><tr class="rank-<%= row.position %>"><td>#<%= row.position %></td><td><div class="profile-mini"><img class="profile-avatar" src="<%= row.avatar_url || '/img/agent-avatar.svg' %>" alt="avatar"><strong><%= row.name %></strong></div></td><td><%= row.team %></td><td><strong><%= row.totalScore %></strong></td><td><%= row.growth %></td><td><%= row.consistency %></td><td><%= row.engagement %></td><td><%= row.leadership %></td><td><%= row.badges[0] %></td></tr><% }) %></table>
+</main></body></html>

@@ -17,3 +17,6 @@ Implemented analytics dashboard to display productivity indicators, performance 
 
 Version 1.5
 Added leaderboard and ranking module to compare agent performance using productivity scores and activity records.
+
+Version 1.6
+Implemented manager reporting module for team performance monitoring and appraisal report generation.
